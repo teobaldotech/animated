@@ -1,0 +1,27 @@
+# 🎇 Letreiro Animado Interativo
+
+Este projeto é um letreiro digital com animação de texto, efeitos visuais e som, criado com HTML, CSS e JavaScript. Ideal para banners de sites, apresentações ou páginas de boas-vindas com um toque moderno e chamativo.
+
+## ✨ Funcionalidades
+
+- Texto animado com efeito de digitação (`Typed.js`)
+- Mudança de cor dinâmica a cada frase
+- Efeito de brilho pulsante estilo LED
+- Som suave ao trocar de frase
+- Interatividade: clique para pausar ou retomar a animação
+
+## 🧰 Tecnologias usadas
+
+- HTML5
+- CSS3 (com animações e gradientes)
+- JavaScript
+- [Typed.js](https://github.com/mattboldt/typed.js/)
+- Fonte Orbitron via Google Fonts
+- Efeito sonoro via SoundJay
+
+## 📦 Como usar
+
+1. Clone o repositório ou copie os arquivos para seu projeto:
+
+```bash
+git clone https://github.com/seu-usuario/letreiro-animado.git
