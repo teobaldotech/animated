@@ -1,38 +1,77 @@
-# animated
-//animated sign
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-    <title>Animçao digitando...</title>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.bootcss.com/typed.js/1.1.4/typed.min.js"></script>
-    <style type="text/css">
-        .write{
-            font-size: 55px;
-            background-color: rgb(187, 88, 162);
-        }
-        .container{
-            text-align: center;
-            color:aquamarine;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Letreiro Interativo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #000000, #1a1a1a);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .write {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 60px;
+      padding: 20px;
+      border-radius: 10px;
+      transition: color 0.5s ease;
+      text-shadow: 0 0 10px #fff;
+    }
+  </style>
 </head>
 <body>
-  
-<div class="container">
+  <div class="container">
     <span class="write"></span>
-</div>
-<script type="text/javascript">
-  
-    
+  </div>
 
+  <audio id="clickSound" src="https://www.soundjay.com/button/sounds/button-16.mp3" preload="auto"></audio>
 
-  $(function(){
-    $(".write").typed({
-        strings: ["Bem vindo ao letreiro animado , obrigado por visitar"],
-        typeSpeed: 1,
+  <script>
+    const frases = [
+      "🎉 Bem-vindo ao letreiro animado!",
+      "💡 Criatividade em movimento!",
+      "🚀 Obrigado por visitar, Teobaldo!",
+      "✨ Brilhando como nunca!"
+    ];
+
+    const cores = ["#00ffe7", "#ff00c8", "#ffd700", "#00ff88"];
+    let corAtual = 0;
+    let animacaoAtiva = true;
+
+    const typed = new Typed(".write", {
+      strings: frases,
+      typeSpeed: 50,
+      backSpeed: 30,
+      backDelay: 1500,
+      loop: true,
+      onStringTyped: () => {
+        document.getElementById("clickSound").play();
+        corAtual = (corAtual + 1) % cores.length;
+        document.querySelector(".write").style.color = cores[corAtual];
+        document.querySelector(".write").style.textShadow = `0 0 20px ${cores[corAtual]}`;
+      }
     });
-});
-</script>
+
+    document.querySelector(".container").addEventListener("click", () => {
+      if (animacaoAtiva) {
+        typed.stop();
+      } else {
+        typed.start();
+      }
+      animacaoAtiva = !animacaoAtiva;
+    });
+  </script>
 </body>
 </html>
