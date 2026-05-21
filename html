@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Letreiro Interativo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #000000, #1a1a1a);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+      transition: background 0.5s ease;
+    }
+
+    .container {
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .write {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 60px;
+      padding: 20px;
+      border-radius: 10px;
+      transition: color 0.5s ease;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      0% { text-shadow: 0 0 10px #fff; }
+      50% { text-shadow: 0 0 20px #ff00c8; }
+      100% { text-shadow: 0 0 10px #fff; }
+    }
+
+    .controls {
+      margin-top: 20px;
+    }
+
+    .controls button, .controls input {
+      margin: 5px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .light-mode {
+      background: linear-gradient(135deg, #ffffff, #e0e0e0);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <span class="write"></span>
+  </div>
+
+  <div class="controls">
+    <button onclick="diminuirVelocidade()">- Velocidade</button>
+    <button onclick="aumentarVelocidade()">+ Velocidade</button>
+    <input id="novaFrase" type="text" placeholder="Digite uma nova frase">
+    <button onclick="adicionarFrase()">Adicionar frase</button>
+    <button onclick="alternarModo()">Alternar modo</button>
+  </div>
+
+  <script>
+    const frases = [
+      "🎉 Bem-vindo ao letreiro animado!",
+      "💡 Criatividade em movimento!",
+      "🚀 Obrigado por visitar, Teobaldo!",
+      "✨ Brilhando como nunca!"
+    ];
+
+    const cores = ["#00ffe7", "#ff00c8", "#ffd700", "#00ff88"];
+    let corAtual = 0;
+    let animacaoAtiva = true;
+
+    const sons = [
+      "https://www.soundjay.com/button/sounds/button-16.mp3",
+      "https://www.soundjay.com/button/sounds/button-09.mp3",
+      "https://www.soundjay.com/button/sounds/button-10.mp3"
+    ];
+
+    function tocarSomAleatorio() {
+      const som = new Audio(sons[Math.floor(Math.random() * sons.length)]);
+      som.play();
+    }
+
+    let typed = new Typed(".write", {
+      strings: frases,
+      typeSpeed: 50,
+      backSpeed: 30,
+      backDelay: 1500,
+      loop: true,
+      onStringTyped: () => {
+        tocarSomAleatorio();
+        corAtual = (corAtual + 1) % cores.length;
+        document.querySelector(".write").style.color = cores[corAtual];
+        document.querySelector(".write").style.textShadow = `0 0 20px ${cores[corAtual]}`;
+      }
+    });
+
+    document.querySelector(".container").addEventListener("click", () => {
+      if (animacaoAtiva) {
+        typed.stop();
+      } else {
+        typed.start();
+      }
+      animacaoAtiva = !animacaoAtiva;
+    });
+
+    function adicionarFrase() {
+      const frase = document.getElementById("novaFrase").value;
+      if (frase) {
+        frases.push(frase);
+        typed.strings = frases;
+        document.getElementById("novaFrase").value = "";
+      }
+    }
+
+    function aumentarVelocidade() {
+      typed.options.typeSpeed = Math.max(10, typed.options.typeSpeed - 10);
+      typed.options.backSpeed = Math.max(10, typed.options.backSpeed - 10);
+    }
+
+    function diminuirVelocidade() {
+      typed.options.typeSpeed += 10;
+      typed.options.backSpeed += 10;
+    }
+
+    function alternarModo() {
+      document.body.classList.toggle("light-mode");
+    }
+  </script>
+</body>
+</html>
+
+      onStringTyped: () => {
+        document.getElementById("clickSound").play();
+        corAtual = (corAtual + 1) % cores.length;
+        document.querySelector(".write").style.color = cores[corAtual];
+        document.querySelector(".write").style.textShadow = `0 0 20px ${cores[corAtual]}`;
+      }
+    });
+
+    document.querySelector(".container").addEventListener("click", () => {
