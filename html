@@ -67,15 +67,46 @@
     <input id="novaFrase" type="text" placeholder="Digite uma nova frase">
     <button onclick="adicionarFrase()">Adicionar frase</button>
     <button onclick="alternarModo()">Alternar modo</button>
+    <button onclick="alternarCategoria()">Alternar categoria</button>
   </div>
 
   <script>
-    const frases = [
-      "🎉 Bem-vindo ao letreiro animado!",
-      "💡 Criatividade em movimento!",
-      "🚀 Obrigado por visitar, Teobaldo!",
-      "✨ Brilhando como nunca!"
-    ];
+    // Categorias de frases com ícones variados
+    const categorias = {
+      padrao: [
+        "🎉 Bem-vindo ao letreiro animado!",
+        "💡 Criatividade em movimento!",
+        "🚀 Obrigado por visitar, Teobaldo!",
+        "✨ Brilhando como nunca!"
+      ],
+      tecnologia: [
+        "💻 Tecnologia e inovação!",
+        "📱 Conectado ao futuro!",
+        "🤖 Inteligência em ação!",
+        "⚡ Energia digital!"
+      ],
+      natureza: [
+        "🌳 Conectado com a natureza!",
+        "🌻 Florescendo ideias!",
+        "🌊 Fluindo como o mar!",
+        "☀️ Brilho do sol!"
+      ],
+      diversao: [
+        "🎮 Diversão garantida!",
+        "🎶 Música no ar!",
+        "🎨 Arte sem limites!",
+        "🍿 Hora da diversão!"
+      ],
+      motivacao: [
+        "💪 Força e determinação!",
+        "🏆 Rumo à vitória!",
+        "🔥 Motivação sem limites!",
+        "🌟 Brilhe intensamente!"
+      ]
+    };
+
+    let categoriaAtual = "padrao";
+    let frases = categorias[categoriaAtual];
 
     const cores = ["#00ffe7", "#ff00c8", "#ffd700", "#00ff88"];
     let corAtual = 0;
@@ -137,16 +168,14 @@
     function alternarModo() {
       document.body.classList.toggle("light-mode");
     }
+
+    function alternarCategoria() {
+      const categoriasKeys = Object.keys(categorias);
+      let index = categoriasKeys.indexOf(categoriaAtual);
+      categoriaAtual = categoriasKeys[(index + 1) % categoriasKeys.length];
+      frases = categorias[categoriaAtual];
+      typed.strings = frases;
+    }
   </script>
 </body>
 </html>
-
-      onStringTyped: () => {
-        document.getElementById("clickSound").play();
-        corAtual = (corAtual + 1) % cores.length;
-        document.querySelector(".write").style.color = cores[corAtual];
-        document.querySelector(".write").style.textShadow = `0 0 20px ${cores[corAtual]}`;
-      }
-    });
-
-    document.querySelector(".container").addEventListener("click", () => {
