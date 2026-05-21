@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Letreiro Interativo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <!-- Importando várias fontes do Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Press+Start+2P&family=Pacifico&family=Roboto+Mono&family=Lobster&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   <style>
     body {
@@ -24,7 +25,6 @@
     }
 
     .write {
-      font-family: 'Orbitron', sans-serif;
       font-size: 60px;
       padding: 20px;
       border-radius: 10px;
@@ -54,11 +54,18 @@
     .light-mode {
       background: linear-gradient(135deg, #ffffff, #e0e0e0);
     }
+
+    /* Classes de fontes */
+    .orbitron { font-family: 'Orbitron', sans-serif; }
+    .pressstart { font-family: 'Press Start 2P', cursive; }
+    .pacifico { font-family: 'Pacifico', cursive; }
+    .roboto { font-family: 'Roboto Mono', monospace; }
+    .lobster { font-family: 'Lobster', cursive; }
   </style>
 </head>
 <body>
   <div class="container">
-    <span class="write"></span>
+    <span class="write orbitron"></span>
   </div>
 
   <div class="controls">
@@ -68,6 +75,7 @@
     <button onclick="adicionarFrase()">Adicionar frase</button>
     <button onclick="alternarModo()">Alternar modo</button>
     <button onclick="alternarCategoria()">Alternar categoria</button>
+    <button onclick="alternarFonte()">Alternar fonte</button>
   </div>
 
   <script>
@@ -175,6 +183,15 @@
       categoriaAtual = categoriasKeys[(index + 1) % categoriasKeys.length];
       frases = categorias[categoriaAtual];
       typed.strings = frases;
+    }
+
+    const fontes = ["orbitron", "pressstart", "pacifico", "roboto", "lobster"];
+    let fonteAtual = 0;
+
+    function alternarFonte() {
+      const write = document.querySelector(".write");
+      write.className = "write " + fontes[fonteAtual];
+      fonteAtual = (fonteAtual + 1) % fontes.length;
     }
   </script>
 </body>
